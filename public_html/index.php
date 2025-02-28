@@ -1,9 +1,11 @@
 <?php
+  include '../lib/html_helper.php';
+
   // Extract the survey
   const SURVEY_PATH = "../surveys/favorites.json";
   $survey = json_decode(file_get_contents(SURVEY_PATH));
   $title = htmlentities($survey->title);
-  $introParagraphs = htmlentities($survey->intro);
+  $introParagraphs = text_to_paragraphs($survey->intro);
 
   // Start the session
   session_start();
