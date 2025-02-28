@@ -1,0 +1,19 @@
+{
+  "title": "Favorites Survey",
+  "comment": "This minimal survey with text inputs is designed to test the survey app's basic flow.",
+  "intro": "In this short survey, you'll tell us a few of your favorite things!",
+  "questions": [
+    {
+      "question": "What is your favorite food?",
+      "input": "text"
+    },
+    {
+      "question": "What is your all-time favorite movie?",
+      "input": "text"
+    },
+    {
+      "question": "Where would you like to go on vacation next?",
+      "input": "text"
+    }
+  ]
+}

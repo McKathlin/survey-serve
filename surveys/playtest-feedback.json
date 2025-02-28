@@ -1,0 +1,44 @@
+{
+  "title": "Playtest Feedback Form",
+  "comment": "This survey is my official submission!",
+  "intro": "Thank you for playtesting Stories from Danger's Den!\n\nThis survey will ask about your playtesting experience. All questions are optional; your answers will help guide further development.",
+  "questions": [
+    {
+      "text": "How did you find out about Stories from Danger's Den?",
+      "input": "dropdown",
+      "options": ["Select one...", "X (Twitter)", "Facebook", "Itch", "Friend or Family", "Other"]
+    },
+    {
+      "text": "How would you rate the difficulty of your play session?",
+      "input": "range",
+      "min": 0,
+      "max": 10,
+      "minLabel": "Too Easy",
+      "maxLabel": "Too Hard"
+    },
+    {
+      "text": "What were some things you most enjoyed about playing?",
+      "input": "paragraph"
+    },
+    {
+      "text": "What do you see as the game's most urgent needs for improvement?",
+      "input": "paragraph"
+    },
+    {
+      "text": "Which types of settings did you see as you played?",
+      "input": "checkboxes"
+    },
+    {
+      "text": "Which of these do you most want to see in the next version of the game?",
+      "input": "radioButtons"
+    },
+    {
+      "text": "If you have any other comments or suggestions, please share them here.",
+      "input": "paragraph"
+    },
+    {
+      "text": "May we contact you with more questions about your experience? If so, please provide your email address.",
+      "input": "email"
+    }
+  ]
+}
