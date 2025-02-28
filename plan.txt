@@ -1,0 +1,51 @@
+TODO: study design patterns for page templates in PHP
+  Paste the header and footer?
+  Or paste the question?
+Use readfile() to read the contents of a file and output them.
+ 
+Survey questions using different types of inputs:
+1. How did you find out about Stories from Danger's Den?
+   Dropdown: Twitter/X, Facebook, Itch, Friend or Family, Other
+2. How would you rate the difficulty of your play session?
+   (sliding scale from Too Easy through Just Right to Too Hard)
+3. What were some things you most enjoyed about playing?
+   Textarea that can resize vertically
+4. What do you see as the game's most urgent needs for improvement?
+   Textarea that can resize vertically
+5. Which types of settings did you see as you played?
+   Checkboxes: Town, Castle, Cave, Tower, Forest Dungeon, Small Site
+6. What do you most want to see in the next version of the game?
+   Radio buttons: More world biomes, More dungeon settings,
+     More monster types, More quest archetypes
+   Optionally, add an Other option that enables a text input
+7. If you have any other comments or suggestions, please share them here.
+   Textarea that can resize vertically
+8. May we contact you with more questions about your experience?
+   If so, please provide your email address.
+   (This may be a compound question: yes/no radio button and email field)
+
+Survey page structure
+Keep it simple, but it could include:
+  Title
+  Progress: Question # of 8, a progress bar, or both.
+  The question
+  Back and Next links
+  Extra Credit: links to all pages once entire survey is filled out
+  Footer with a new-tab link to dangersden.net
+
+To show one question at a time using PHP,
+  I plan to give each question type its own page,
+  consult the content file for question text and input type,
+  send them to the next page through POST,
+  and store answers on the SESSION.
+Once the survey is submitted,
+  the answers from the SESSION are displayed.
+Extra Credit: Show an intero before starting the survey.
+Extra Credit: Show the answers as a final check instead,
+  and allow the user to revisit questions to change their answers if desired.
+Extra Credit: I might also store submitted answers in a CSV or database.
+  If I do, I need to make sure they are stored OUTSIDE public_html.
+
+Extra Credit: Make survey questions slide in from the right
+  and slide out to the left.
+  This should only be enabled if reduced motion is NOT preferred.
