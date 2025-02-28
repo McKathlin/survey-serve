@@ -9,6 +9,7 @@
 
   // Start the session
   session_start();
+  $_SESSION['title'] = $title;
   $_SESSION['questions'] = $survey->questions;
 ?>
 <!DOCTYPE html>
@@ -23,9 +24,7 @@
     <h1><?=$title?></h1>
   </header>
   <main>
-    <p>
-      <?=$introParagraphs?>
-    </p>
+    <?=$introParagraphs?>
     <nav class="button-row">
       <form action="./survey.php" method="post">
         <button type="submit" name="qNum" value="1">Start the Survey</button>
