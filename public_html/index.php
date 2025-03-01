@@ -1,15 +1,9 @@
 <?php
-  include '../lib/html_helper.php';
+  require '../survey_session.php';
+  require '../lib/html_helper.php';
 
-  // Extract the survey
   const SURVEY_PATH = "../surveys/favorites.json";
-  $survey = json_decode(file_get_contents(SURVEY_PATH));
-  $introParagraphs = text_to_paragraphs($survey->intro);
-
-  // Start the session
-  session_start();
-  $_SESSION['survey'] = $survey;
-  $_SESSION['answers'] = [];
+  $survey = SurveySession::startFromFile(SURVEY_PATH);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +17,7 @@
     <h1><?=$survey->title?></h1>
   </header>
   <main>
-    <?=$introParagraphs?>
+    <?=text_to_paragraphs($survey->intro)?>
     <nav class="button-row">
       <form action="./survey.php" method="post">
         <input type="hidden" name="index" value=0>

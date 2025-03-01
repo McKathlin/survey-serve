@@ -1,22 +1,22 @@
 <?php
-  // Resume the session.
-  session_start();
-  if (!isset($_SESSION['survey'])) {
+  require '../survey_session.php';
+  require '../lib/html_helper.php';
+
+  $survey = SurveySession::resume();
+  if (is_null($survey)) {
     header("Location: /index.php");
   }
-  $survey = $_SESSION['survey'];
-  $questionCount = count($survey->questions);
 
   // Store the previous answer on the session
   $previousIndex = intval($_POST['index'] ?? 0);
-  $_SESSION['answers'][$previousIndex] = $_POST['answer'];
+  $survey->setAnswer($previousIndex, $_POST['answer']);
 
   // Find the current question.
   $questionIndex = $previousIndex + intval($_POST['direction']);
   $question = $survey->questions[$questionIndex];
 
   // If we're passing the last question, proceed to the review page.
-  if ($questionIndex >= $questionCount) {
+  if ($questionIndex >= $survey->questionCount()) {
     header("Location: /review.php");
   }
 ?>
@@ -33,12 +33,11 @@
     <p><?=var_dump($_POST)?></p>
   </header>
   <main>
-    <h2>Question <?=($questionIndex + 1)?> of <?=$questionCount?></h2>
+    <h2>Question <?=($questionIndex + 1)?> of <?=$survey->questionCount()?></h2>
     <form method="post">
       <input type="hidden" name="index" value="<?=$questionIndex?>">
       <fieldset>
         <?php
-          require '../lib/html_helper.php';
           echo text_to_paragraphs($question->text)
         ?>
         <!-- TODO: Insert the input fragment here. -->
