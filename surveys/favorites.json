@@ -4,15 +4,15 @@
   "intro": "In this short survey, you'll tell us a few of your favorite things!",
   "questions": [
     {
-      "question": "What is your favorite food?",
+      "text": "What is your favorite food?",
       "input": "text"
     },
     {
-      "question": "What is your all-time favorite movie?",
+      "text": "What is your all-time favorite movie?",
       "input": "text"
     },
     {
-      "question": "Where would you like to go on vacation next?",
+      "text": "Where would you like to go on vacation next?",
       "input": "text"
     }
   ]
