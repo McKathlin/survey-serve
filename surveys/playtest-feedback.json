@@ -6,7 +6,7 @@
     {
       "text": "How did you find out about Stories from Danger's Den?",
       "input": "dropdown",
-      "options": ["Select one...", "X (Twitter)", "Facebook", "Itch", "Friend or Family", "Other"]
+      "options": ["X (Twitter)", "Facebook", "Itch", "Friend or Family", "Other"]
     },
     {
       "text": "How would you rate the difficulty of your play session?",
