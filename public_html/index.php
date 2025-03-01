@@ -2,7 +2,7 @@
 require '../survey_session.php';
 require '../lib/html_helper.php';
 
-const SURVEY_PATH = "../surveys/favorites.json";
+const SURVEY_PATH = "../surveys/playtest-feedback.json";
 $survey = SurveySession::startFromFile(SURVEY_PATH);
 ?>
 <!DOCTYPE html>
