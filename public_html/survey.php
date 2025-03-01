@@ -37,10 +37,7 @@
     <form method="post">
       <input type="hidden" name="index" value="<?=$questionIndex?>">
       <fieldset>
-        <?php
-          echo text_to_paragraphs($question->text)
-        ?>
-        <!-- TODO: Insert the input fragment here. -->
+        <?php include "../inputs/text.php" ?>
       </fieldset>
       <nav class="button-row">
         <button type="submit" name="direction" value="1">Next</button>
