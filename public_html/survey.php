@@ -1,6 +1,4 @@
 <?php
-  include '../lib/html_helper.php';
-
   // Resume the session.
   session_start();
   if (!isset($_SESSION['questions'])) {
@@ -13,10 +11,15 @@
   $previousIndex = intval($_POST['index'] ?? 0);
   $_SESSION['answers'][$previousIndex] = $_POST['answer'];
 
-  // Find the current question
+  // Find the current question.
   $questionIndex = $previousIndex + intval($_POST['direction']);
   $questionCount = count($allQuestions);
   $question = $allQuestions[$questionIndex];
+
+  // If we're passing the last question, proceed to the review page.
+  if ($questionIndex >= $questionCount) {
+    header("Location: /review.php");
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +38,10 @@
     <form method="post">
       <input type="hidden" name="index" value="<?=$questionIndex?>">
       <fieldset>
-        <?=text_to_paragraphs($question->text)?>
+        <?php
+          require '../lib/html_helper.php';
+          echo text_to_paragraphs($question->text)
+        ?>
         <!-- TODO: Insert the input fragment here. -->
       </fieldset>
       <nav class="button-row">
