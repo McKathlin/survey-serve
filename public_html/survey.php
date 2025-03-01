@@ -30,14 +30,20 @@ if ($questionIndex >= $survey->questionCount()) {
 <body>
   <header>
     <h1><?=$survey->title?></h1>
-    <p><?=var_dump($_POST)?></p>
   </header>
   <main>
     <h2>Question <?=($questionIndex + 1)?> of <?=$survey->questionCount()?></h2>
     <form method="post">
       <input type="hidden" name="index" value="<?=$questionIndex?>">
       <fieldset>
-        <?php include "../inputs/text.php" ?>
+        <?php
+        $questionPath = "../inputs/" . $question->input . ".php";
+        if (file_exists($questionPath)) {
+          include $questionPath;
+        } else {
+          include "../inputs/text.php";
+        }
+        ?>
       </fieldset>
       <nav class="button-row">
         <button type="submit" name="direction" value="1">Next</button>

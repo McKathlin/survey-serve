@@ -12,8 +12,8 @@
       "input": "text"
     },
     {
-      "text": "What's your dream vacation spot?",
-      "input": "text"
+      "text": "Describe your dream vacation.",
+      "input": "paragraph"
     }
   ]
 }
