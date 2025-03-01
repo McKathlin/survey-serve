@@ -1,8 +1,3 @@
-TODO: study design patterns for page templates in PHP
-  Paste the header and footer?
-  Or paste the question?
-Use readfile() to read the contents of a file and output them.
- 
 Survey questions using different types of inputs:
 1. How did you find out about Stories from Danger's Den?
    Dropdown: Twitter/X, Facebook, Itch, Friend or Family, Other
@@ -17,7 +12,6 @@ Survey questions using different types of inputs:
 6. What do you most want to see in the next version of the game?
    Radio buttons: More world biomes, More dungeon settings,
      More monster types, More quest archetypes
-   Optionally, add an Other option that enables a text input
 7. If you have any other comments or suggestions, please share them here.
    Textarea that can resize vertically
 8. May we contact you with more questions about your experience?
