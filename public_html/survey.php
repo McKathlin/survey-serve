@@ -1,15 +1,22 @@
 <?php
   include '../lib/html_helper.php';
 
+  // Resume the session.
   session_start();
   if (!isset($_SESSION['questions'])) {
     header("Location: /index.php");
   }
+  $title = $_SESSION['title'];
+  $allQuestions = $_SESSION['questions'];
+
+  // Store the previous answer on the session
+  $previousIndex = intval($_POST['index'] ?? 0);
+  $_SESSION['answers'][$previousIndex] = $_POST['answer'];
 
   // Find the current question
-  $questionNumber = $_POST['qNum'] ?? 1;
-  $questionCount = count($_SESSION['questions']);
-  $question = $_SESSION['questions'][$questionNumber - 1];
+  $questionIndex = $previousIndex + intval($_POST['direction']);
+  $questionCount = count($allQuestions);
+  $question = $allQuestions[$questionIndex];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,14 +28,18 @@
 <body>
   <header>
     <h1><?=$title?></h1>
+    <p><?=var_dump($_POST)?></p>
   </header>
   <main>
-    <h2>Question <?=$questionNumber?> of <?=$questionCount?></h2>
+    <h2>Question <?=($questionIndex + 1)?> of <?=$questionCount?></h2>
     <form method="post">
-      <!-- TODO: The question goes here. -->
-       <p><?=var_dump($question)?></p>
+      <input type="hidden" name="index" value="<?=$questionIndex?>">
+      <fieldset>
+        <?=text_to_paragraphs($question->text)?>
+        <!-- TODO: Insert the input fragment here. -->
+      </fieldset>
       <nav class="button-row">
-        <button type="submit" name="qNum" value="<?=($questionNumber + 1)?>">Next</button>
+        <button type="submit" name="direction" value="1">Next</button>
       </nav>
     </form>
   </main>
