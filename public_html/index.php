@@ -1,9 +1,9 @@
 <?php
-  require '../survey_session.php';
-  require '../lib/html_helper.php';
+require '../survey_session.php';
+require '../lib/html_helper.php';
 
-  const SURVEY_PATH = "../surveys/favorites.json";
-  $survey = SurveySession::startFromFile(SURVEY_PATH);
+const SURVEY_PATH = "../surveys/favorites.json";
+$survey = SurveySession::startFromFile(SURVEY_PATH);
 ?>
 <!DOCTYPE html>
 <html lang="en">

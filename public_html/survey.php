@@ -1,24 +1,24 @@
 <?php
-  require '../survey_session.php';
-  require '../lib/html_helper.php';
+require '../survey_session.php';
+require '../lib/html_helper.php';
 
-  $survey = SurveySession::resume();
-  if (is_null($survey)) {
-    header("Location: /index.php");
-  }
+$survey = SurveySession::resume();
+if (is_null($survey)) {
+  header("Location: /index.php");
+}
 
-  // Store the previous answer on the session
-  $previousIndex = intval($_POST['index'] ?? 0);
-  $survey->setAnswer($previousIndex, $_POST['answer']);
+// Store the previous answer on the session
+$previousIndex = intval($_POST['index'] ?? 0);
+$survey->setAnswer($previousIndex, $_POST['answer']);
 
-  // Find the current question.
-  $questionIndex = $previousIndex + intval($_POST['direction']);
-  $question = $survey->questions[$questionIndex];
+// Find the current question.
+$questionIndex = $previousIndex + intval($_POST['direction']);
+$question = $survey->questions[$questionIndex];
 
-  // If we're passing the last question, proceed to the review page.
-  if ($questionIndex >= $survey->questionCount()) {
-    header("Location: /review.php");
-  }
+// If we're passing the last question, proceed to the review page.
+if ($questionIndex >= $survey->questionCount()) {
+  header("Location: /review.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
