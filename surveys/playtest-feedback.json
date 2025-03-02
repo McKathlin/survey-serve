@@ -25,11 +25,6 @@
       "input": "paragraph"
     },
     {
-      "text": "Which types of settings did you see as you played?",
-      "input": "checkboxes",
-      "options": ["Town", "Castle", "Cave", "Tower", "Forest Dungeon", "Small Site"]
-    },
-    {
       "text": "Which of these do you most want to see in the next version of the game?",
       "input": "radioButtons",
       "options": ["More world biomes", "More dungeon settings", "More monster types", "More quest archetypes"]
