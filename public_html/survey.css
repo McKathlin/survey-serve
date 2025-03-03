@@ -1,0 +1,19 @@
+body {
+  --default-font: 'Trebuchet MS', 'Lucida Sans', sans-serif;
+
+  --text-color: #222222;
+  --instruction-text-color: #333231;
+  --back-color: #d0d4d8;
+
+  --header-text-color: #fefdfc;
+  --header-back-color: #882211;
+
+  --card-head-back-color: #a8a4a0;
+  --card-back-color: #fefdfc;
+  --card-foot-back-color: #a8a4a0;
+  --card-edge-color: #445566;
+
+  font-family: var(--default-font);
+  color: var(--text-color, black);
+  background: var(--back-color, white);
+}
