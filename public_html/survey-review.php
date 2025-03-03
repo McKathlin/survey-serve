@@ -5,6 +5,7 @@ require '../lib/html_helper.php';
 $survey = SurveySession::resume();
 if (is_null($survey)) {
   header("Location: /index.php");
+  exit();
 }
 ?>
 <!DOCTYPE html>
