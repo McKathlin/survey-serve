@@ -5,6 +5,7 @@ class SurveySession {
   // Properties
   public string $title;
   public string $intro;
+  public string $handle;
   public array $questions;
 
   // Raw answers are private because they contain unsafe user-submitted text.
@@ -14,6 +15,7 @@ class SurveySession {
   public function __construct($dataObject, $answers = NULL) {
     $this->title = $dataObject->title;
     $this->intro = $dataObject->intro;
+    $this->handle = $dataObject->handle;
     $this->questions = $dataObject->questions;
     $this->answers = $answers ?? [];
   }
@@ -76,6 +78,20 @@ class SurveySession {
     } else {
       return "<$element>" . htmlentities($answer) . "</$element>";
     }
+  }
+
+  // Append answers to a TSV file.
+  public function addAnswersToFile($path) {
+    $tsvItems = [];
+    foreach ($this->answers  as $answer) {
+      $tsvAnswer = $answer;
+      $tsvAnswer = str_replace("\\", "\\\\", $tsvAnswer);
+      $tsvAnswer = str_replace("\n", "\\n", $tsvAnswer);
+      $tsvAnswer = str_replace("\t", "\\t", $tsvAnswer);
+      array_push($tsvItems, $tsvAnswer);
+    }
+    $tsvLine = implode("\t", $tsvItems);
+    file_put_contents($path, $tsvLine);
   }
 }
 

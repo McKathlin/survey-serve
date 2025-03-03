@@ -1,4 +1,5 @@
 {
+  "handle": "favorites",
   "title": "Favorites Survey",
   "intro": "In this short survey, you'll tell us a few of your favorite things!",
   "questions": [

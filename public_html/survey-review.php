@@ -7,6 +7,8 @@ if (is_null($survey)) {
   header("Location: /index.php");
   exit();
 }
+$filename = $survey->handle;
+$survey->addAnswersToFile("../answers/$filename.tsv");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +23,7 @@ if (is_null($survey)) {
     <h1><?=$survey->title?></h1>
   </header>
   <main>
-    <h2>Thank you! Your answers are below:</h2>
+    <h2>Thank you! Your answers have been recorded.</h2>
     <?php for($i = 0; $i < $survey->questionCount(); $i++) { ?>
       <section class="review-question">
         <div class="question"><p>Question <?=($i + 1)?>: <?=$survey->questions[$i]->text?></p></div>
