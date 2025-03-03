@@ -57,12 +57,14 @@ class SurveySession {
   }
 
   // Returns an answer in an HTML-safe form.
-  public function getAnswerHtml($index) {
+  public function getAnswerHtml($index, $element = NULL) {
     $answer = $this->answers[$index];
-    if ('paragraph' == $this->questions[$index]->input) {
-      return text_to_paragraphs($answer);
-    } else {
+    if (is_null($element)) {
       return htmlentities($answer);
+    } else if ('paragraph' == $this->questions[$index]->input) {
+      return text_to_paragraphs($answer, $element);
+    } else {
+      return "<$element>" . htmlentities($answer) . "</$element>";
     }
   }
 }
