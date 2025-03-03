@@ -21,7 +21,11 @@ class SurveySession {
   // Static factory methods
 
   public static function startFromFile($path) {
-    return SurveySession::startFromJson(file_get_contents($path));
+    if (file_exists($path)) {
+      return SurveySession::startFromJson(file_get_contents($path));
+    } else {
+      return NULL;
+    }
   }
 
   public static function startFromJson($json) {
@@ -36,10 +40,11 @@ class SurveySession {
 
   public static function resume() {
     session_start();
-    if (!isset($_SESSION['survey'])) {
+    if (isset($_SESSION['survey'])) {
+      return new SurveySession($_SESSION['survey'], $_SESSION['answers']);
+    } else {
       return NULL;
     }
-    return new SurveySession($_SESSION['survey'], $_SESSION['answers']);
   }
 
   public static function clear() {

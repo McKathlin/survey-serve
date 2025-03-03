@@ -2,8 +2,19 @@
 require '../survey_session.php';
 require '../lib/html_helper.php';
 
-const SURVEY_PATH = "../surveys/favorites.json";
-$survey = SurveySession::startFromFile(SURVEY_PATH);
+if (!isset($_GET['survey'])) {
+  header("Location: /index.php");
+  exit();
+}
+
+$handle = $_GET['survey'];
+$surveyPath = "../surveys/$handle.json";
+$survey = SurveySession::startFromFile($surveyPath);
+if (!$survey) {
+  http_response_code(404);
+  // TODO: show 404 Not Found page
+  exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
