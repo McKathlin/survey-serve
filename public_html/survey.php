@@ -22,6 +22,7 @@ if ($questionIndex >= $survey->questionCount()) {
   exit();
 }
 $question = $survey->questions[$questionIndex];
+$isLastQuestion = ($questionIndex + 1 == $survey->questionCount());
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +51,9 @@ $question = $survey->questions[$questionIndex];
         ?>
       </fieldset>
       <nav class="button-row">
-        <button type="submit" name="direction" value="1">Next</button>
+        <button type="submit" name="direction" value="1" class="next-button">
+          <?=($isLastQuestion ? "Finish" : "Next")?>
+        </button>
       </nav>
     </form>
   </main>
