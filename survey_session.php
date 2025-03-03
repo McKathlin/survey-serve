@@ -36,6 +36,9 @@ class SurveySession {
 
   public static function resume() {
     session_start();
+    if (!isset($_SESSION['survey'])) {
+      return NULL;
+    }
     return new SurveySession($_SESSION['survey'], $_SESSION['answers']);
   }
 
