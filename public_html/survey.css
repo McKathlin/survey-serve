@@ -16,15 +16,75 @@ body {
   --instruction-text-color: #333231;
   --back-color: #dce0e4;
 
-  --header-text-color: #fefdfc;
+  --header-text-color: #f9f6f3;
   --header-back-color: #882211;
 
   --card-head-back-color: #a8a4a0;
   --card-back-color: #f9f6f3;
   --card-foot-back-color: #a8a4a0;
-  --card-edge-color: #445566;
+  --card-shadow-color: #00225530;
 
-  font-family: var(--default-font);
+  font-family: var(--paragraph-font);
   color: var(--text-color, black);
   background: var(--back-color, white);
+
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font);
+}
+
+/* header */
+
+header {
+  color: var(--header-text-color, white);
+  background-color: var(--header-back-color, maroon);
+  text-align: center;
+  padding: 5px;
+  width: 100%;
+}
+
+header h1 {
+  font-size: 175%;
+}
+
+/* main */
+
+main {
+  color: var(--text-color);
+  background-color: var(--card-back-color);
+  font-size: 110%;
+  margin: auto 10px;
+
+  max-width: 40rem;
+  min-height: 35vh;
+
+  border-radius: 10px;
+  box-shadow: 0 0 8px var(--card-shadow-color);
+
+  display: flex;
+  flex-direction: column;
+}
+
+main > * {
+  padding: 8px 16px;
+}
+
+/* inputs */
+
+/* footer */
+
+footer {
+  font-family: var(--heading-font);
+  font-style: italic;
+  text-align: center;
+  opacity: 0.75;
+  width: 100%;
+  line-height: 2rem;
 }

@@ -28,8 +28,10 @@ if (!$survey) {
   <header>
     <h1><?=$survey->title?></h1>
   </header>
-  <main>
-    <?=text_to_paragraphs($survey->intro)?>
+  <main class="intro">
+    <div class="intro-text-container">
+      <?=text_to_paragraphs($survey->intro)?>
+    </div>
     <nav class="button-row">
       <form action="./survey.php" method="post">
         <input type="hidden" name="index" value=0>
