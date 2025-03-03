@@ -1,11 +1,14 @@
 <?php
+require '../lib/html_helper.php';
 
 class SurveySession {
   // Properties
   public string $title;
   public string $intro;
   public array $questions;
-  public array $answers;
+
+  // Raw answers are private because they contain unsafe user-submitted text.
+  private array $answers;
 
   // Constructor
   public function __construct($dataObject, $answers = NULL) {
@@ -51,6 +54,16 @@ class SurveySession {
   public function setAnswer($index, $value) {
     $this->answers[$index] = $value;
     $_SESSION['answers'][$index] = $value;
+  }
+
+  // Returns an answer in an HTML-safe form.
+  public function getAnswerHtml($index) {
+    $answer = $this->answers[$index];
+    if ('paragraph' == $this->questions[$index]->input) {
+      return text_to_paragraphs($answer);
+    } else {
+      return htmlentities($answer);
+    }
   }
 }
 

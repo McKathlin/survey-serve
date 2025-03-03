@@ -25,7 +25,7 @@ if (is_null($survey)) {
       <section>
         <h3>Question <?=($i + 1)?></h3>
         <p class="question"><?=$survey->questions[$i]->text?></p>
-        <p class="answer"><?=$survey->answers[$i]?></p>
+        <p class="answer"><?=$survey->getAnswerHtml($i)?></p>
       </section>
     <?php } /* end for $i */ ?>
   </main>
