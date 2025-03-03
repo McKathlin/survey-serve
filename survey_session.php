@@ -51,6 +51,8 @@ class SurveySession {
     return count($this->questions);
   }
 
+  // Sets an answer at a given index.
+  // If there is already an answer, the new value replaces the old.
   public function setAnswer($index, $value) {
     $this->answers[$index] = $value;
     $_SESSION['answers'][$index] = $value;
