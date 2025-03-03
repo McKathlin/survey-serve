@@ -23,9 +23,8 @@ if (is_null($survey)) {
   <main>
     <h2>Thank you! Your answers are below:</h2>
     <?php for($i = 0; $i < $survey->questionCount(); $i++) { ?>
-      <section>
-        <h3>Question <?=($i + 1)?></h3>
-        <div class="question"><p><?=$survey->questions[$i]->text?></p></div>
+      <section class="review-question">
+        <div class="question"><p>Question <?=($i + 1)?>: <?=$survey->questions[$i]->text?></p></div>
         <div class="answer"><?=$survey->getAnswerHtml($i, 'p')?></div>
       </section>
     <?php } /* end for $i */ ?>
