@@ -33,7 +33,7 @@ if (!$survey) {
     <nav class="button-row">
       <form action="./survey.php" method="post">
         <input type="hidden" name="index" value=0>
-        <button type="submit" name="direction" value=0>Start the Survey</button>
+        <button type="submit" name="direction" value=0 class="next-button">Start the Survey</button>
       </form>
     </nav>
   </main>
