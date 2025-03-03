@@ -5,20 +5,23 @@ require '../lib/html_helper.php';
 $survey = SurveySession::resume();
 if (is_null($survey)) {
   header("Location: /index.php");
+  exit();
 }
 
 // Store the previous answer on the session
 $previousIndex = intval($_POST['index'] ?? 0);
-$survey->setAnswer($previousIndex, $_POST['answer']);
+if (isset($_POST['answer'])) {
+  $survey->setAnswer($previousIndex, $_POST['answer']);
+}
 
-// Find the current question.
+// Get the current question,
+// or if we're past the last question, proceed to review.
 $questionIndex = $previousIndex + intval($_POST['direction']);
-$question = $survey->questions[$questionIndex];
-
-// If we're passing the last question, proceed to the review page.
 if ($questionIndex >= $survey->questionCount()) {
   header("Location: /review.php");
+  exit();
 }
+$question = $survey->questions[$questionIndex];
 ?>
 <!DOCTYPE html>
 <html lang="en">
