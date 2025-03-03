@@ -85,13 +85,14 @@ class SurveySession {
     $tsvItems = [];
     foreach ($this->answers  as $answer) {
       $tsvAnswer = $answer;
+      $tsvAnswer = str_replace("\r\n", "\n", $tsvAnswer);
       $tsvAnswer = str_replace("\\", "\\\\", $tsvAnswer);
       $tsvAnswer = str_replace("\n", "\\n", $tsvAnswer);
       $tsvAnswer = str_replace("\t", "\\t", $tsvAnswer);
       array_push($tsvItems, $tsvAnswer);
     }
-    $tsvLine = implode("\t", $tsvItems);
-    file_put_contents($path, $tsvLine);
+    $tsvLine = implode("\t", $tsvItems) . "\n";
+    file_put_contents($path, $tsvLine, FILE_APPEND);
   }
 }
 

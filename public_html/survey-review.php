@@ -4,11 +4,12 @@ require '../lib/html_helper.php';
 
 $survey = SurveySession::resume();
 if (is_null($survey)) {
-  header("Location: /index.php");
+  header("Location: /index.html");
   exit();
 }
 $filename = $survey->handle;
 $survey->addAnswersToFile("../answers/$filename.tsv");
+SurveySession::clear();
 ?>
 <!DOCTYPE html>
 <html lang="en">
