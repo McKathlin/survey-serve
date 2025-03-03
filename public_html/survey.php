@@ -18,7 +18,7 @@ if (isset($_POST['answer'])) {
 // or if we're past the last question, proceed to review.
 $questionIndex = $previousIndex + intval($_POST['direction']);
 if ($questionIndex >= $survey->questionCount()) {
-  header("Location: /review.php");
+  header("Location: /survey-review.php");
   exit();
 }
 $question = $survey->questions[$questionIndex];
