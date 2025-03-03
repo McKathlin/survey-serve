@@ -1,4 +1,5 @@
 /* reset */
+
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -12,14 +13,14 @@ body {
   --paragraph-font: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
   --text-color: black;
-  --back-color-a: #d0d8e0;
-  --back-color-b: #e8e4e0;
+  --back-color: #dce0e4;
+  --back-color-highlight: #f9f6f3;
 
   --footer-height: 2rem;
 
   font-family: var(--paragraph-font);
-  color: var(--text-color, black);
-  background: var(--back-color-a, white);
+  color: var(--text-color);
+  background: var(--back-color);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -58,7 +59,7 @@ section#intro {
 }
 
 section#demos {
-  background: var(--back-color-b);
+  background: var(--back-color-highlight);
   max-width: 45rem;
   margin: auto;
   padding: 20px;
