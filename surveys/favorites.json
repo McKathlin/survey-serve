@@ -1,11 +1,15 @@
 {
   "title": "Favorites Survey",
-  "comment": "This minimal survey with text inputs is designed to test the survey app's basic flow.",
   "intro": "In this short survey, you'll tell us a few of your favorite things!",
   "questions": [
     {
       "text": "What is your favorite food?",
       "input": "text"
+    },
+    {
+      "text": "Which color of the rainbow do you like best?",
+      "input": "dropdown",
+      "options": ["red", "orange", "yellow", "green", "blue", "indigo", "violet"]
     },
     {
       "text": "What is your all-time favorite movie?",
@@ -14,6 +18,11 @@
     {
       "text": "Describe your dream vacation.",
       "input": "paragraph"
+    },
+    {
+      "text": "One final question:\n\nDC or Marvel?",
+      "input": "radioButtons",
+      "options": ["DC", "Marvel", "a secret third thing"]
     }
   ]
 }
