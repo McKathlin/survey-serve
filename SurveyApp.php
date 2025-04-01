@@ -9,9 +9,21 @@ class SurveyApp {
   // This is the directory relative to public_html
   const SURVEY_DIR = "../surveys";
 
+  // Session
+
   public static function startSession($surveyHandle) {
     $path = self::SURVEY_DIR . "/" . $surveyHandle . ".json";
     return SurveySession::startFromFile($path);
+  }
+
+  public static function resumeSession() {
+    return SurveySession::resume();
+  }
+
+  public static function finishSession() {
+    $survey = SurveySession::resume();
+    $survey->addAnswersToFile("../answers/$survey->handle.tsv");
+    SurveySession::clear();
   }
 }
 
@@ -55,7 +67,9 @@ class SurveySession {
   }
 
   public static function resume() {
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+      session_start();
+    }
     if (isset($_SESSION['survey'])) {
       return new SurveySession($_SESSION['survey'], $_SESSION['answers']);
     } else {

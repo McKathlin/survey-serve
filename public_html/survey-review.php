@@ -2,14 +2,12 @@
 require '../SurveyApp.php';
 require '../lib/html_helper.php';
 
-$survey = SurveySession::resume();
+$survey = SurveyApp::resumeSession();
 if (is_null($survey)) {
   header("Location: /index.html");
   exit();
 }
-$filename = $survey->handle;
-$survey->addAnswersToFile("../answers/$filename.tsv");
-SurveySession::clear();
+SurveyApp::finishSession();
 ?>
 <!DOCTYPE html>
 <html lang="en">
