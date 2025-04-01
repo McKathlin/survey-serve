@@ -1,6 +1,20 @@
 <?php
 require '../lib/html_helper.php';
 
+// Classes in this file:
+// * SurveyApp
+// * SurveySession
+
+class SurveyApp {
+  // This is the directory relative to public_html
+  const SURVEY_DIR = "../surveys";
+
+  public static function startSession($surveyHandle) {
+    $path = self::SURVEY_DIR . "/" . $surveyHandle . ".json";
+    return SurveySession::startFromFile($path);
+  }
+}
+
 class SurveySession {
   // Properties
   public string $title;
@@ -24,7 +38,7 @@ class SurveySession {
 
   public static function startFromFile($path) {
     if (file_exists($path)) {
-      return SurveySession::startFromJson(file_get_contents($path));
+      return self::startFromJson(file_get_contents($path));
     } else {
       return NULL;
     }

@@ -8,8 +8,7 @@ if (!isset($_GET['survey'])) {
 }
 
 $handle = $_GET['survey'];
-$surveyPath = "../surveys/$handle.json";
-$survey = SurveySession::startFromFile($surveyPath);
+$survey = SurveyApp::startSession($handle);
 if (!$survey) {
   http_response_code(404);
   // TODO: show 404 Not Found page
