@@ -1,5 +1,5 @@
 <?php
-require '../survey_session.php';
+require '../SurveyApp.php';
 require '../lib/html_helper.php';
 
 $survey = SurveySession::resume();
