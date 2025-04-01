@@ -43,7 +43,7 @@ class SurveyApp {
 
     // Append answers to a TSV file.
     $tsvItems = [];
-    foreach ($survey->answers  as $answer) {
+    foreach ($survey->getPlainAnswers() as $answer) {
       $tsvAnswer = $answer;
       $tsvAnswer = str_replace("\r\n", "\n", $tsvAnswer);
       $tsvAnswer = str_replace("\\", "\\\\", $tsvAnswer);
@@ -136,6 +136,12 @@ class SurveySession {
     } else {
       return "<$element>" . htmlentities($answer) . "</$element>";
     }
+  }
+
+  // Returns all answers, unaltered.
+  // Syntactic vinegar for answers property
+  public function getPlainAnswers() {
+    return $this->answers;
   }
 }
 
