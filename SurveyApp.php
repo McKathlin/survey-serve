@@ -6,14 +6,23 @@ require '../lib/html_helper.php';
 // * SurveySession
 
 class SurveyApp {
-  // This is the directory relative to public_html
+  // Paths (relative to public_html)
+
   const SURVEY_DIR = "../surveys";
+  const ANSWERS_DIR = "../answers";
+
+  public static function getSurveyPath($surveyHandle) {
+    return self::SURVEY_DIR . "/" . $surveyHandle . ".json";
+  }
+
+  public static function getAnswersPath($surveyHandle) {
+    return self::ANSWERS_DIR . "/" . $surveyHandle . ".tsv";
+  }
 
   // Session
 
   public static function startSession($surveyHandle) {
-    $path = self::SURVEY_DIR . "/" . $surveyHandle . ".json";
-    return SurveySession::startFromFile($path);
+    return SurveySession::startFromFile(self::getSurveyPath($surveyHandle));
   }
 
   public static function resumeSession() {
@@ -22,8 +31,29 @@ class SurveyApp {
 
   public static function finishSession() {
     $survey = SurveySession::resume();
-    $survey->addAnswersToFile("../answers/$survey->handle.tsv");
+    self::_writeSurveyAnswers("../answers/$survey->handle.tsv");
     SurveySession::clear();
+  }
+
+  private static function _writeSurveyAnswers($path) {
+    $survey = SurveySession::resume();
+    if (is_null($survey)) {
+      return false;
+    }
+
+    // Append answers to a TSV file.
+    $tsvItems = [];
+    foreach ($survey->answers  as $answer) {
+      $tsvAnswer = $answer;
+      $tsvAnswer = str_replace("\r\n", "\n", $tsvAnswer);
+      $tsvAnswer = str_replace("\\", "\\\\", $tsvAnswer);
+      $tsvAnswer = str_replace("\n", "\\n", $tsvAnswer);
+      $tsvAnswer = str_replace("\t", "\\t", $tsvAnswer);
+      array_push($tsvItems, $tsvAnswer);
+    }
+    $tsvLine = implode("\t", $tsvItems) . "\n";
+    file_put_contents($path, $tsvLine, FILE_APPEND);
+    return true;
   }
 }
 
@@ -106,21 +136,6 @@ class SurveySession {
     } else {
       return "<$element>" . htmlentities($answer) . "</$element>";
     }
-  }
-
-  // Append answers to a TSV file.
-  public function addAnswersToFile($path) {
-    $tsvItems = [];
-    foreach ($this->answers  as $answer) {
-      $tsvAnswer = $answer;
-      $tsvAnswer = str_replace("\r\n", "\n", $tsvAnswer);
-      $tsvAnswer = str_replace("\\", "\\\\", $tsvAnswer);
-      $tsvAnswer = str_replace("\n", "\\n", $tsvAnswer);
-      $tsvAnswer = str_replace("\t", "\\t", $tsvAnswer);
-      array_push($tsvItems, $tsvAnswer);
-    }
-    $tsvLine = implode("\t", $tsvItems) . "\n";
-    file_put_contents($path, $tsvLine, FILE_APPEND);
   }
 }
 
