@@ -2,12 +2,12 @@
 require '../SurveyApp.php';
 require '../lib/html_helper.php';
 
-$survey = SurveyApp::resumeSession();
+$survey = SurveyApp::finishSession();
 if (is_null($survey)) {
   header("Location: /index.html");
   exit();
 }
-SurveyApp::finishSession();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

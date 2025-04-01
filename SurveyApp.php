@@ -31,12 +31,12 @@ class SurveyApp {
 
   public static function finishSession() {
     $survey = SurveySession::resume();
-    self::_writeSurveyAnswers("../answers/$survey->handle.tsv");
+    self::_writeSurveyAnswers($survey, "../answers/$survey->handle.tsv");
     SurveySession::clear();
+    return $survey;
   }
 
-  private static function _writeSurveyAnswers($path) {
-    $survey = SurveySession::resume();
+  private static function _writeSurveyAnswers($survey, $path) {
     if (is_null($survey)) {
       return false;
     }
