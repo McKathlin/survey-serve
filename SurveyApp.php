@@ -3,7 +3,7 @@ require '../lib/html_helper.php';
 
 // Classes in this file:
 // * SurveyApp
-// * SurveySession
+// * Survey
 
 class SurveyApp {
   // Paths (relative to public_html)
@@ -22,17 +22,45 @@ class SurveyApp {
   // Session
 
   public static function startSession($surveyHandle) {
-    return SurveySession::startFromFile(self::getSurveyPath($surveyHandle));
+    return self::startSessionFromFile(self::getSurveyPath($surveyHandle));
   }
 
   public static function resumeSession() {
-    return SurveySession::resume();
+    if (session_status() == PHP_SESSION_NONE) {
+      session_start();
+    }
+    if (isset($_SESSION['survey'])) {
+      return new SurveyTake($_SESSION['survey'], $_SESSION['answers']);
+    } else {
+      return NULL;
+    }
   }
 
   public static function finishSession() {
-    $survey = SurveySession::resume();
+    $survey = self::resumeSession();
     self::_writeSurveyAnswers($survey, "../answers/$survey->handle.tsv");
-    SurveySession::clear();
+    $_SESSION['survey'] = NULL;
+    $_SESSION['answers'] = NULL;
+    return $survey;
+  }
+
+  // Private helpers
+
+  private static function startSessionFromFile($path) {
+    if (file_exists($path)) {
+      return self::startSessionFromJson(file_get_contents($path));
+    } else {
+      return NULL;
+    }
+  }
+
+  private static function startSessionFromJson($json) {
+    $newData = json_decode($json);
+    $newAnswers = [];
+    session_start();
+    $_SESSION['survey'] = $newData;
+    $_SESSION['answers'] = $newAnswers;
+    $survey = new SurveyTake($newData, $newAnswers);
     return $survey;
   }
 
@@ -57,14 +85,14 @@ class SurveyApp {
   }
 }
 
-class SurveySession {
+class SurveyTake {
   // Properties
   public string $title;
   public string $intro;
   public string $handle;
   public array $questions;
 
-  // Raw answers are private because they contain unsafe user-submitted text.
+  // Raw answers are private; they contain unsafe user-submitted text.
   private array $answers;
 
   // Constructor
@@ -76,44 +104,7 @@ class SurveySession {
     $this->answers = $answers ?? [];
   }
 
-  // Static factory methods
-
-  public static function startFromFile($path) {
-    if (file_exists($path)) {
-      return self::startFromJson(file_get_contents($path));
-    } else {
-      return NULL;
-    }
-  }
-
-  public static function startFromJson($json) {
-    $newData = json_decode($json);
-    $newAnswers = [];
-    session_start();
-    $_SESSION['survey'] = $newData;
-    $_SESSION['answers'] = $newAnswers;
-    $survey = new SurveySession($newData, $newAnswers);
-    return $survey;
-  }
-
-  public static function resume() {
-    if (session_status() == PHP_SESSION_NONE) {
-      session_start();
-    }
-    if (isset($_SESSION['survey'])) {
-      return new SurveySession($_SESSION['survey'], $_SESSION['answers']);
-    } else {
-      return NULL;
-    }
-  }
-
-  public static function clear() {
-    session_start();
-    $_SESSION['survey'] = NULL;
-    $_SESSION['answers'] = NULL;
-  }
-
-  // Instance methods
+  // Methods
 
   public function questionCount() {
     return count($this->questions);
@@ -139,7 +130,7 @@ class SurveySession {
   }
 
   // Returns all answers, unaltered.
-  // Syntactic vinegar for answers property
+  // Syntactic vinegar for accessing answers property
   public function getPlainAnswers() {
     return $this->answers;
   }
