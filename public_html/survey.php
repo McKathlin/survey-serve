@@ -17,7 +17,10 @@ if (isset($_POST['answer'])) {
 // Get the current question,
 // or if we're past the last question, proceed to review.
 $questionIndex = $previousIndex + intval($_POST['direction']);
-if ($questionIndex >= $survey->questionCount()) {
+if ($questionIndex < 0) {
+  header("Location: /survey-intro.php?survey=$survey->handle");
+  exit();
+} else if ($questionIndex >= $survey->questionCount()) {
   header("Location: /survey-review.php");
   exit();
 }
@@ -51,6 +54,9 @@ $isLastQuestion = ($questionIndex + 1 == $survey->questionCount());
         ?>
       </fieldset>
       <nav class="button-row">
+        <button type="submit" name="direction" value="-1" class="back-button">
+          Back
+        </button>
         <button type="submit" name="direction" value="1" class="next-button">
           <?=($isLastQuestion ? "Finish" : "Next")?>
         </button>
