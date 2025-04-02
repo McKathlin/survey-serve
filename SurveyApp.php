@@ -22,7 +22,7 @@ class SurveyApp {
   // Session
 
   public static function startSession($surveyHandle) {
-    return self::startSessionFromFile(self::getSurveyPath($surveyHandle));
+    return self::_startSessionFromFile(self::getSurveyPath($surveyHandle));
   }
 
   public static function resumeSession() {
@@ -46,15 +46,15 @@ class SurveyApp {
 
   // Private helpers
 
-  private static function startSessionFromFile($path) {
+  private static function _startSessionFromFile($path) {
     if (file_exists($path)) {
-      return self::startSessionFromJson(file_get_contents($path));
+      return self::_startSessionFromJson(file_get_contents($path));
     } else {
       return NULL;
     }
   }
 
-  private static function startSessionFromJson($json) {
+  private static function _startSessionFromJson($json) {
     $newData = json_decode($json);
     $newAnswers = [];
     session_start();
