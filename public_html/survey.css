@@ -20,6 +20,7 @@ body {
   --header-text-color: #f9f6f3;
   --header-back-color: #882211;
   --next-button-back-color: #116633;
+  --subtle-shadow-color: #00000020;
 
   --card-head-back-color: #a8a4a0;
   --card-back-color: #f9f6f3;
@@ -143,6 +144,17 @@ main button {
   border: 1px solid var(--text-color);
   border-radius: 7px;
   cursor: pointer;
+}
+
+main button.back-button {
+  background: var(--card-back-color);
+  border: none;
+  box-shadow: 0px 0px 3px var(--subtle-shadow-color);
+  margin-right: auto;
+}
+
+main button.back-button::before {
+  content: "< ";
 }
 
 main button.next-button {
