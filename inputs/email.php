@@ -1,2 +1,2 @@
 <label for="answer"><?=$question->text?></label>
-<input type="email" id="answer" name="answer">
+<input type="email" id="answer" name="answer" value="<?=$answer?>">

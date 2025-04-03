@@ -3,7 +3,11 @@
   <option value="">Select one...</option>
   <?php
   foreach ($question->options as $option) {
-    echo "<option>$option</option>\n";
+    if ($option == $answer) {
+      echo "<option selected='selected'>$option</option>";
+    } else {
+      echo "<option>$option</option>\n";
+    }
   }
   ?>
 </select>

@@ -120,6 +120,10 @@ class SurveyTake {
   // Returns an answer in an HTML-safe form.
   public function getAnswerHtml($index, $element = NULL) {
     $answer = $this->answers[$index];
+    if (is_null($answer)) {
+      $answer = "";
+    }
+    
     if (is_null($element)) {
       return htmlentities($answer);
     } else if ('paragraph' == $this->questions[$index]->input) {

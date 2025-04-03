@@ -25,6 +25,7 @@ if ($questionIndex < 0) {
   exit();
 }
 $question = $survey->questions[$questionIndex];
+$answer = $survey->getAnswerHtml($questionIndex);
 $isLastQuestion = ($questionIndex + 1 == $survey->questionCount());
 ?>
 <!DOCTYPE html>

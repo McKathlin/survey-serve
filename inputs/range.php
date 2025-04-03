@@ -4,7 +4,7 @@
   <div class="range-container">
     <span class="min-label"><?=$question->minLabel?></span>
     <input type="range" id="answer" name="answer"
-      min="<?=$question->min?>" max="<?=$question->max?>">
+      min="<?=$question->min?>" max="<?=$question->max?>" value="<?=$answer?>">
     <span class="max-label"><?=$question->maxLabel?></span>
   </div>
 </label>
